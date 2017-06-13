@@ -1,0 +1,4 @@
+#!/bin/bash
+
+export XDEBUG_CONFIG="idekey=PHPSTORM"
+php -d "xdebug.remote_autostart=1" -d "xdebug.remote_enable=1" "${@:1}"

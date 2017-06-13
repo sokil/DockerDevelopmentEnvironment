@@ -1,0 +1,22 @@
+server
+{
+    listen 80;
+    server_name {SERVERNAME};
+
+    error_log /var/log/nginx/{SERVERNAME}.error.log info;
+    access_log off;
+
+    root /var/www/{SERVERNAME};
+
+    location @app
+    {
+        fastcgi_pass php:9000;
+        include /etc/nginx/fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root/app.php;
+    }
+
+    location /
+    {
+        try_files $uri @app;
+    }
+}
