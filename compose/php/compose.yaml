@@ -7,10 +7,10 @@ services:
     image: "${PHP_IMAGE}"
     command: "bash /entrypoint.sh"
     volumes:
-      - "./compose/php/entrypoint.sh:/entrypoint.sh"
+      - "./entrypoint.sh:/entrypoint.sh"
       - "${NGINX_MOUNT_DIR}:/var/www/${COMPOSE_PROJECT_NAME}"
-      - "../php.ini:/usr/local/etc/php/php.ini"
-      - "../xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini"
+      - "./conf/php.ini:/usr/local/etc/php/php.ini"
+      - "./conf/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini"
     depends_on:
       - "mysql"
     links:
