@@ -42,8 +42,25 @@ function drop_container {
 }
 
 function up_container {
-    PROJECT_NAME=$1
-    echo $IMAGE_NGINX;
+    DOCKER_COMPOSE_COMMAND="docker-compose"
+    if [[ ! -z $IMAGE_NGINX ]];
+    then
+        DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/nginx/compose.yaml"
+    fi
+
+    if [[ ! -z $IMAGE_MYSQL ]];
+    then
+        DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/php/compose.yaml"
+    fi
+
+    if [[ ! -z $IMAGE_PHP ]];
+    then
+        DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/mysql/compose.yaml"
+    fi
+
+    DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} ${@}"
+
+    bash -c $DOCKER_COMPOSE_COMMAND
 }
 
 function exec_container_command_root {
@@ -95,7 +112,7 @@ source $PROJECT_FILE
 # dispatch command
 case $COMMAND_NAME in
     up)
-        up_container ${PROJECT_NAME}
+        up_container ${@:2}
         ;;
     bash)
         SERVICE_NAME=$3
