@@ -1,0 +1,18 @@
+version : '2'
+
+services:
+
+  php:
+    container_name: "${PROJECT_NAME}_php"
+    image: "${IMAGE_PHP}"
+    command: "bash /var/www/${PROJECT_NAME}/app/config/docker/init.sh"
+    volumes:
+      - "../../../..:/var/www/${PROJECT_PATH}"
+      - "../php.ini:/usr/local/etc/php/php.ini"
+      - "../xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini"
+    depends_on:
+      - "mysql"
+    links:
+      - "mysql"
+    environment:
+      PHP_IDE_CONFIG: "serverName=${PROJECT_NAME}"

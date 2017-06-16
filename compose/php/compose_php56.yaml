@@ -1,5 +1,0 @@
-version : '2'
-
-services:
-  php-fpm:
-    image: php:5.6-fpm
