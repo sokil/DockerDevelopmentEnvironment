@@ -1,13 +1,14 @@
-version : '2'
+version : '3'
 
 services:
 
   php:
-    container_name: "${PROJECT_NAME}_php"
-    image: "${IMAGE_PHP}"
-    command: "bash /var/www/${PROJECT_NAME}/app/config/docker/init.sh"
+    container_name: "${COMPOSE_PROJECT_NAME}_php"
+    image: "${PHP_IMAGE}"
+    command: "bash /entrypoint.sh"
     volumes:
-      - "../../../..:/var/www/${PROJECT_PATH}"
+      - "./compose/php/entrypoint.sh:/entrypoint.sh"
+      - "${NGINX_MOUNT_DIR}:/var/www/${COMPOSE_PROJECT_NAME}"
       - "../php.ini:/usr/local/etc/php/php.ini"
       - "../xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini"
     depends_on:
@@ -15,4 +16,4 @@ services:
     links:
       - "mysql"
     environment:
-      PHP_IDE_CONFIG: "serverName=${PROJECT_NAME}"
+      PHP_IDE_CONFIG: "serverName=${COMPOSE_PROJECT_NAME}"

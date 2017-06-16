@@ -1,13 +1,13 @@
-version : '2'
+version : '3'
 
 services:
 
   nginx:
-    container_name: "${PROJECT_NAME}_nginx"
-    image: "${IMAGE_NGINX}"
+    container_name: "${COMPOSE_PROJECT_NAME}_nginx"
+    image: "${NGINX_IMAGE}"
     volumes:
-      - "../../../..:/var/www/${PROJECT_NAME}"
-      - "../../nginx/docker.conf:/etc/nginx/conf.d/${PROJECT_NAME}.conf"
+      - "../../../..:/var/www/${COMPOSE_PROJECT_NAME}"
+      - "../../nginx/docker.conf:/etc/nginx/conf.d/${COMPOSE_PROJECT_NAME}.conf"
       - "../../../logs/nginx:/var/log/nginx"
     ports:
       - "80:80"

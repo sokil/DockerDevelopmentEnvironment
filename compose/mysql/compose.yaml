@@ -1,17 +1,17 @@
-version : '2'
+version : '3'
 
 services:
 
   mysql:
-    container_name: "${PROJECT_NAME}_mysql"
-    image: "${IMAGE_MYSQL}"
+    container_name: "${COMPOSE_PROJECT_NAME}_mysql"
+    image: "${MYSQL_IMAGE}"
     ports:
       - "3306:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
-      MYSQL_DATABASE: "${PROJECT_NAME}"
-      MYSQL_USER: "${PROJECT_NAME}"
-      MYSQL_PASSWORD: "${PROJECT_NAME}"
+      MYSQL_DATABASE: "${COMPOSE_PROJECT_NAME}"
+      MYSQL_USER: "${COMPOSE_PROJECT_NAME}"
+      MYSQL_PASSWORD: "${COMPOSE_PROJECT_NAME}"
     volumes:
       - ../../../../share/mysql:/var/lib/mysql:rw
       - ../my.cnf:/etc/mysql/my.cnf

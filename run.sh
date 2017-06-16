@@ -5,7 +5,7 @@ PROJECT_FILES_DIR=${CURRENT_DIR}/projects
 
 function print_usage {
     MESSAGE=$1
-    echo -e "\033[1;37mUseage\033[0m: ./run.sh command project_name [command_argument, ...]"
+    echo -e "\033[1;37mUseage\033[0m: ./run.sh command COMPOSE_PROJECT_NAME [command_argument, ...]"
     echo $MESSAGE
 }
 
@@ -26,7 +26,7 @@ function print_available_projects {
 }
 
 function drop_container {
-    PROJECT_NAME=$1
+    COMPOSE_PROJECT_NAME=$1
     # ask for confirm
     while true; do
         read -p "Do you really want to drop containers? (y/n): " yn
@@ -38,50 +38,53 @@ function drop_container {
     done
 
     # drop containers
-    docker ps -a -f NAME=${PROJECT_NAME} --format "{{.Names}}" | xargs -I{} docker rm {}
+    docker ps -a -f NAME=${COMPOSE_PROJECT_NAME} --format "{{.Names}}" | xargs -I{} docker rm {}
 }
 
 function up_container {
-    DOCKER_COMPOSE_COMMAND="docker-compose"
+    DOCKER_COMPOSE_COMMAND="docker-compose -p ${COMPOSE_PROJECT_NAME}"
 
-    if [[ ! -z $IMAGE_NGINX ]];
+    # append service confugs
+    if [[ ! -z $NGINX_IMAGE ]];
     then
         DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/nginx/compose.yaml"
     fi
 
-    if [[ ! -z $IMAGE_MYSQL ]];
+    if [[ ! -z $MYSQL_IMAGE ]];
     then
         DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/php/compose.yaml"
     fi
 
-    if [[ ! -z $IMAGE_PHP ]];
+    if [[ ! -z $PHP_IMAGE ]];
     then
         DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/mysql/compose.yaml"
     fi
 
+    # append up params
     DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} ${@}"
 
-    bash -c "echo ${DOCKER_COMPOSE_COMMAND}"
+    # start up
+    bash -c "${DOCKER_COMPOSE_COMMAND}"
 }
 
 function exec_container_command_root {
-    PROJECT_NAME=$1
+    COMPOSE_PROJECT_NAME=$1
     SERVICE_NAME=$2
     SHELL_COMMAND=$3
-    docker exec -it ${PROJECT_NAME}_${SERVICE_NAME} ${SHELL_COMMAND}
+    docker exec -it ${COMPOSE_PROJECT_NAME}_${SERVICE_NAME} ${SHELL_COMMAND}
 }
 
 function exec_container_command_user {
-    PROJECT_NAME=$1
+    COMPOSE_PROJECT_NAME=$1
     SERVICE_NAME=$2
     SHELL_COMMAND=$3
     USER_NAME=$4
-    docker exec --user ${USER_NAME} -it ${PROJECT_NAME}_${SERVICE_NAME} $SHELL_COMMAND
+    docker exec --user ${USER_NAME} -it ${COMPOSE_PROJECT_NAME}_${SERVICE_NAME} $SHELL_COMMAND
 }
 
 # read project name from cli arguments
-PROJECT_NAME=$1
-if [[ -z $PROJECT_NAME ]];
+COMPOSE_PROJECT_NAME=$1
+if [[ -z $COMPOSE_PROJECT_NAME ]];
 then
     print_usage
     print_available_commands
@@ -90,7 +93,7 @@ then
 fi
 
 # check project file
-PROJECT_FILE=${PROJECT_FILES_DIR}/${PROJECT_NAME}.env
+PROJECT_FILE=${PROJECT_FILES_DIR}/${COMPOSE_PROJECT_NAME}.env
 if [[ ! -e $PROJECT_FILE ]];
 then
     echo -e "\033[1;31mInvalid project specified\033[0m"
@@ -108,7 +111,11 @@ then
 fi
 
 # import project
+export COMPOSE_PROJECT_NAME
+
+set -o allexport
 source $PROJECT_FILE
+set +o allexport
 
 # dispatch command
 case $COMMAND_NAME in
@@ -117,16 +124,16 @@ case $COMMAND_NAME in
         ;;
     bash)
         SERVICE_NAME=$3
-        exec_container_command_root ${PROJECT_NAME} $SERVICE_NAME bash
+        exec_container_command_root ${COMPOSE_PROJECT_NAME} $SERVICE_NAME bash
         ;;
     shell_php)
-        exec_container_command_user ${PROJECT_NAME} php bash www-data
+        exec_container_command_user ${COMPOSE_PROJECT_NAME} php bash www-data
         ;;
     shell_mysql)
-        exec_container_command_root ${PROJECT_NAME} php "mysql ${PROJECT_NAME}"
+        exec_container_command_root ${COMPOSE_PROJECT_NAME} php "mysql ${COMPOSE_PROJECT_NAME}"
         ;;
     drop)
-        drop_container "${PROJECT_NAME}"
+        drop_container "${COMPOSE_PROJECT_NAME}"
         ;;
     *)
         echo "Unknown command"
