@@ -43,6 +43,7 @@ function drop_container {
 
 function up_container {
     DOCKER_COMPOSE_COMMAND="docker-compose"
+
     if [[ ! -z $IMAGE_NGINX ]];
     then
         DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/nginx/compose.yaml"
@@ -60,7 +61,7 @@ function up_container {
 
     DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} ${@}"
 
-    bash -c $DOCKER_COMPOSE_COMMAND
+    bash -c "echo ${DOCKER_COMPOSE_COMMAND}"
 }
 
 function exec_container_command_root {
