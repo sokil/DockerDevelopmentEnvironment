@@ -22,7 +22,6 @@ Container management done through `run.sh`.
 
 ```
 $ ./run.sh
-Invalid command specified
 Available commands:
 bash [service_name]: launch bash in some service container
 shell_php: launch bash as www-user in container
