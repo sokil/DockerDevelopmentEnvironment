@@ -62,6 +62,9 @@ function up_container {
     # append up params
     DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} ${@}"
 
+    # show command
+    echo -e "\033[1;37mCommand\033[0m: ${DOCKER_COMPOSE_COMMAND}"
+
     # start up
     bash -c "${DOCKER_COMPOSE_COMMAND}"
 }
@@ -90,7 +93,7 @@ then
     exit
 fi
 
-# import project
+# import environment
 set -o allexport
 source .env
 set +o allexport
@@ -98,7 +101,7 @@ set +o allexport
 # dispatch command
 case $COMMAND_NAME in
     up)
-        up_container ${@:2}
+        up_container ${@:1}
         ;;
     bash)
         SERVICE_NAME=$2
