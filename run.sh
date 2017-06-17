@@ -10,15 +10,14 @@ function print_usage {
 
 function print_available_commands {
     echo -e "\033[1;37mAvailable commands:\033[0m"
-    echo -e "\033[0;32mup\033[0m: build or run containers"
-    echo -e "\033[0;32mbash\033[0m: launch bash in container"
+    echo -e "\033[0;32mbash [service_name]\033[0m: launch bash in container"
     echo -e "\033[0;32mshell_php\033[0m: launch bash as www-user in container"
     echo -e "\033[0;32mshell_mysql\033[0m: launch mysql in container"
-    echo -e "\033[0;32mdrop\033[0m: drop container"
-    echo -e "\033[0;32mstop\033[0m: stop container"
+    echo -e "\033[0;32mAny commands not in list above goes directly to docker-compose, so be free to use this tool as docker-compose\033[0m"
     echo ""
 }
 
+# drop containers
 function drop_container {
     COMPOSE_PROJECT_NAME=$1
     # ask for confirm
@@ -31,12 +30,11 @@ function drop_container {
         esac
     done
 
-    # drop containers
     docker ps -a -f NAME=${COMPOSE_PROJECT_NAME} --format "{{.Names}}" | xargs -I{} docker rm {}
 }
 
+# stop containers
 function stop_container {
-    # drop containers
     docker ps -a -f NAME=${COMPOSE_PROJECT_NAME} --format "{{.Names}}" | xargs -I{} docker stop {}
 }
 
