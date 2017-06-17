@@ -13,7 +13,7 @@ Then you may change some variables, if need in `.env` file and run container thr
 
 ## Configuration
 
-All configs may be tuned through environment variables, placed in '.env' file,
+All configs may be tuned through environment variables, placed in `.env` file,
 but you can add configuration in any way in any place. All parameters documented there.
 
 ## Managing container
