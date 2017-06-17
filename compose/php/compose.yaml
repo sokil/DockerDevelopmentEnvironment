@@ -13,7 +13,6 @@ services:
       - "./compose/php/conf/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini"
       - "./compose/php/bin:/tools"
       - "./compose/php/bash/.bashrc:/root/.bashrc"
-      - "./shared/php/bash/.bash_history:/root/.bash_history"
     depends_on:
       - "mysql"
     links:
