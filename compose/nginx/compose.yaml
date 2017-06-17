@@ -4,11 +4,12 @@ services:
 
   nginx:
     container_name: "${COMPOSE_PROJECT_NAME}_nginx"
-    command: /bin/bash -c "envsubst < /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/conf.d/nginx.conf && nginx -g 'daemon off;'"
+    command: "bash /entrypoint.sh"
     image: "${NGINX_IMAGE}"
     volumes:
+      - "./compose/nginx/entrypoint.sh:/entrypoint.sh"
       - "./${SRC_DIR}:/var/www/${COMPOSE_PROJECT_NAME}"
-      - "./compose/nginx/conf:/etc/nginx/conf.d"
+      - "./compose/nginx/conf:/etc/nginx/conf.d.template"
       - "./compose/nginx/ssl:/etc/nginx/ssl"
       - "./shared/nginx/logs:/var/log/nginx"
     ports:
