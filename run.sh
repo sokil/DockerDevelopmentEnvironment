@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
 CURRENT_DIR=$(dirname $(readlink -f $0))
-PROJECT_FILES_DIR=${CURRENT_DIR}/projects
 
 function print_usage {
     MESSAGE=$1
-    echo -e "\033[1;37mUseage\033[0m: ./run.sh command COMPOSE_PROJECT_NAME [command_argument, ...]"
+    echo -e "\033[1;37mUseage\033[0m: ./run.sh command [command_argument, ...]"
     echo $MESSAGE
 }
 
@@ -16,12 +15,7 @@ function print_available_commands {
     echo -e "\033[0;32mshell_php\033[0m: launch bash as www-user in container"
     echo -e "\033[0;32mshell_mysql\033[0m: launch mysql in container"
     echo -e "\033[0;32mdrop\033[0m: drop container"
-    echo ""
-}
-
-function print_available_projects {
-    echo -e "\033[1;37mAvailable projects:\033[0m"
-    find $PROJECT_FILES_DIR -type f -printf "%f\n" -name ".env" | sed 's/\.env//g' | xargs -I{} echo "-" {}
+    echo -e "\033[0;32mstop\033[0m: stop container"
     echo ""
 }
 
@@ -39,6 +33,11 @@ function drop_container {
 
     # drop containers
     docker ps -a -f NAME=${COMPOSE_PROJECT_NAME} --format "{{.Names}}" | xargs -I{} docker rm {}
+}
+
+function stop_container {
+    # drop containers
+    docker ps -a -f NAME=${COMPOSE_PROJECT_NAME} --format "{{.Names}}" | xargs -I{} docker stop {}
 }
 
 function up_container {
@@ -82,27 +81,8 @@ function exec_container_command_user {
     docker exec --user ${USER_NAME} -it ${COMPOSE_PROJECT_NAME}_${SERVICE_NAME} $SHELL_COMMAND
 }
 
-# read project name from cli arguments
-COMPOSE_PROJECT_NAME=$1
-if [[ -z $COMPOSE_PROJECT_NAME ]];
-then
-    print_usage
-    print_available_commands
-    print_available_projects
-    exit
-fi
-
-# check project file
-PROJECT_FILE=${PROJECT_FILES_DIR}/${COMPOSE_PROJECT_NAME}.env
-if [[ ! -e $PROJECT_FILE ]];
-then
-    echo -e "\033[1;31mInvalid project specified\033[0m"
-    print_available_projects
-    exit
-fi
-
 # read command cli arguments
-COMMAND_NAME=$2
+COMMAND_NAME=$1
 if [[ -z $COMMAND_NAME ]];
 then
     echo -e "\033[1;31mInvalid command specified\033[0m"
@@ -111,10 +91,8 @@ then
 fi
 
 # import project
-export COMPOSE_PROJECT_NAME
-
 set -o allexport
-source $PROJECT_FILE
+source .env
 set +o allexport
 
 # dispatch command
@@ -123,7 +101,7 @@ case $COMMAND_NAME in
         up_container ${@:2}
         ;;
     bash)
-        SERVICE_NAME=$3
+        SERVICE_NAME=$2
         exec_container_command_root ${COMPOSE_PROJECT_NAME} $SERVICE_NAME bash
         ;;
     shell_php)
@@ -134,6 +112,9 @@ case $COMMAND_NAME in
         ;;
     drop)
         drop_container "${COMPOSE_PROJECT_NAME}"
+        ;;
+    stop)
+        stop_container
         ;;
     *)
         echo "Unknown command"

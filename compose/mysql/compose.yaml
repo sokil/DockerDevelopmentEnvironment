@@ -13,6 +13,6 @@ services:
       MYSQL_USER: "${COMPOSE_PROJECT_NAME}"
       MYSQL_PASSWORD: "${COMPOSE_PROJECT_NAME}"
     volumes:
-      - ../../../../share/mysql:/var/lib/mysql:rw
-      - ../my.cnf:/etc/mysql/my.cnf
-      - ../init:/docker-entrypoint-initdb.d
+      - "./${MYSQL_DATA_DIR}:/var/lib/mysql:rw"
+      - "./compose/mysql/conf/my.cnf:/etc/mysql/my.cnf"
+      - "./${MYSQL_INITDB_DIR}:/docker-entrypoint-initdb.d"

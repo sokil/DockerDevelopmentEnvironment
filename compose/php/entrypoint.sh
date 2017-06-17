@@ -2,12 +2,14 @@
 
 ### Prepare directory
 chown www-data:www-data /var/www
-cd /var/www/opencrm
+cd /var/www/${COMPOSE_PROJECT_NAME}
 
 ### Register host machine
 export DOCKERHOST_IP="$(/sbin/ip route|awk '/default/ { print $3 }')";
 echo "$DOCKERHOST_IP dockerhost" >> /etc/hosts
 
+### Set variables
+export PATH=$PATH:/tools
 
 ### install php extensions
 if [[ -z $(dpkg -l | grep libssl-dev) ]];
@@ -25,13 +27,14 @@ then
         pdo_mysql \
         opcache
 
-    # deploy tools
-    curl -sL https://deb.nodesource.com/setup_6.x | bash -
-    apt-get install -y nodejs
+    # node
+    # curl -sL https://deb.nodesource.com/setup_6.x | bash -
+    # apt-get install -y nodejs
 
-    npm install -g grunt-cli
+    # grunt
+    # npm install -g grunt-cli
 
-    # debug
+    # xdebug
     pecl install xdebug
     docker-php-ext-enable xdebug.so
 fi
@@ -41,12 +44,16 @@ fi
 if [[ -z $(which composer.phar) ]];
 then
     # install composer
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer.phar
+    curl -sS https://getcomposer.org/installer | php -- \
+        --install-dir=/usr/bin \
+        --filename=composer.phar
 
     # update composer
-    composer.phar install --no-scripts -v --optimize-autoloader
+    composer.phar install \
+        --no-scripts \
+        -v \
+        --optimize-autoloader
 fi
-
 
 ### start server
 php-fpm
