@@ -41,7 +41,7 @@ function stop_container {
 }
 
 function up_container {
-    DOCKER_COMPOSE_COMMAND="docker-compose -p ${COMPOSE_PROJECT_NAME}"
+    DOCKER_COMPOSE_COMMAND="docker-compose --project-name ${COMPOSE_PROJECT_NAME} --project-directory ${CURRENT_DIR}"
 
     # append service confugs
     if [[ ! -z $NGINX_IMAGE ]];
