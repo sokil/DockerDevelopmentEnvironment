@@ -19,4 +19,4 @@ services:
     environment:
       - COMPOSE_PROJECT_NAME
       - SRC_DOCUMENT_ROOT
-      - APP_PATH
+      - PHP_APP_ENTRYPOINT
