@@ -106,7 +106,6 @@ function exec_container_command_user {
 COMMAND_NAME=$1
 if [[ -z $COMMAND_NAME ]];
 then
-    echo -e "\033[1;31mInvalid command specified\033[0m"
     print_available_commands
     exit
 fi
