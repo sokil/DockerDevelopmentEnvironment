@@ -1,0 +1,12 @@
+version : '3'
+
+services:
+
+  elasticsearch:
+    image: ${ELASTICSEARCH_IMAGE}
+    volumes:
+      - ./shared/elasticsearch/data:/usr/share/elasticsearch/data
+      - ./shared/elasticsearch/plugins:/usr/share/elasticsearch/plugins
+      - ./compose/elasticsearch/conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - "9200:9200"

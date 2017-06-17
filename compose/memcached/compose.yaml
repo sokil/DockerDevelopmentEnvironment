@@ -1,0 +1,9 @@
+version : '3'
+
+services:
+
+  memcached:
+    image: ${MEMCACHED_IMAGE}
+    ports:
+      - "11211:11211"
+    entrypoint: /entrypoint.sh -m 128

@@ -57,6 +57,26 @@ function compose {
         DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/mysql/compose.yaml"
     fi
 
+    if [[ ! -z $ELASTICSEARCH_IMAGE ]];
+    then
+        DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/elasticsearch/compose.yaml"
+    fi
+
+    if [[ ! -z $REDIS_IMAGE ]];
+    then
+        DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/redis/compose.yaml"
+    fi
+
+    if [[ ! -z $MEMCACHED_IMAGE ]];
+    then
+        DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/memcached/compose.yaml"
+    fi
+
+    if [[ ! -z $RABBITMQ_IMAGE ]];
+    then
+        DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/rabbitmq/compose.yaml"
+    fi
+
     # append up params
     DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} ${@}"
 
