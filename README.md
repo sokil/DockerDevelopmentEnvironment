@@ -9,7 +9,7 @@ pass some configuration together, allowing single place of configuration in `.en
 ## Create project
 
 To create new project just clone this repository anywhere, and place you code to `./src` directory.
-Then you may change some variables, if need` in `.env` file and run container through `run.sh`.
+Then you may change some variables, if need in `.env` file and run container through `run.sh`.
 
 ## Configuration
 
