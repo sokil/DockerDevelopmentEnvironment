@@ -9,7 +9,7 @@ services:
       - "./${SRC_DIR}:/var/www/${COMPOSE_PROJECT_NAME}"
       - "./compose/nginx/conf/nginx.conf:/etc/nginx/conf.d/nginx.conf"
       - "./compose/nginx/ssl:/etc/nginx/ssl"
-      - "./share/nginx/logs:/var/log/nginx"
+      - "./shared/nginx/logs:/var/log/nginx"
     ports:
       - "80:80"
     links:
