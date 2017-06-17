@@ -3,7 +3,7 @@
 This tool is a builder of development environment including PHP-FPM, MySQL and Nginx.
 I'ts just a bunch of configurations, so you can freely change them for you needs.
 It's also pre configured, so you need only place your files in sources directory and run container.
-Entry point to work with container id `run.sh` which wraps `docker-container` and
+Entry point to work with container is `run.sh` which wraps `docker-container` and
 pass some configuration together, allowing single place of configuration in `.env` file.
 
 ## Create project
@@ -13,7 +13,7 @@ Then you may change some variables, if need in `.env` file and run container thr
 
 ## Configuration
 
-All configs may be tuned through environment variables, placed in '.env' file,
+All configs may be tuned through environment variables, placed in `.env` file,
 but you can add configuration in any way in any place. All parameters documented there.
 
 ## Managing container
@@ -22,7 +22,6 @@ Container management done through `run.sh`.
 
 ```
 $ ./run.sh
-Invalid command specified
 Available commands:
 bash [service_name]: launch bash in some service container
 shell_php: launch bash as www-user in container
