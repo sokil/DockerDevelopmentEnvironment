@@ -40,7 +40,7 @@ function stop_container {
     docker ps -a -f NAME=${COMPOSE_PROJECT_NAME} --format "{{.Names}}" | xargs -I{} docker stop {}
 }
 
-function up_container {
+function compose {
     DOCKER_COMPOSE_COMMAND="docker-compose --project-name ${COMPOSE_PROJECT_NAME} --project-directory ${CURRENT_DIR}"
 
     # append service confugs
@@ -100,9 +100,6 @@ set +o allexport
 
 # dispatch command
 case $COMMAND_NAME in
-    up)
-        up_container ${@:1}
-        ;;
     bash)
         SERVICE_NAME=$2
         exec_container_command_root ${COMPOSE_PROJECT_NAME} $SERVICE_NAME bash
@@ -120,6 +117,7 @@ case $COMMAND_NAME in
         stop_container
         ;;
     *)
-        echo "Unknown command"
+        # fallback to docker-container
+        compose ${@:1}
         ;;
 esac
