@@ -1,0 +1,14 @@
+version : '3'
+
+services:
+
+  rabbitmq:
+    container_name: "${COMPOSE_PROJECT_NAME}_rabbitmq"
+    image: "${RABBITMQ_IMAGE}
+    environment:
+      RABBITMQ_DEFAULT_USER: "${COMPOSE_PROJECT_NAME}"
+      RABBITMQ_DEFAULT_PASS: "${COMPOSE_PROJECT_NAME}"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
