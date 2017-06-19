@@ -1,0 +1,8 @@
+version : '3'
+
+services:
+
+  mongodb:
+    image: ${MONGODB_IMAGE}
+    volumes:
+      - ./shared/mongodb:/data/db
