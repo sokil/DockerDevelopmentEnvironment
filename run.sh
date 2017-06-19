@@ -76,6 +76,11 @@ function compose {
     then
         DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/rabbitmq/compose.yaml"
     fi
+    
+    if [[ ! -z $MONGODB_IMAGE ]];
+    then
+        DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/mongodb/compose.yaml"
+    fi
 
     # append up params
     DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} ${@}"
