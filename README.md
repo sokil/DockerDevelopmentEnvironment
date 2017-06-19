@@ -85,3 +85,9 @@ To debug console app, use `xphp` tool:
 ```
 $ xphp some.php
 ```
+
+## Integration
+
+### Sentry
+
+Add Sentry logging intergation with [DockerSentry](https://github.com/sokil/DockerSentry)
