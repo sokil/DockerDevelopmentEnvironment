@@ -1,0 +1,14 @@
+version : '3'
+
+services:
+  postgres:
+    container_name: "${COMPOSE_PROJECT_NAME}_postgresql"
+    image: ${POSTGRESQL_IMAGE}
+    volumes:
+      - ./shared/pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "${COMPOSE_PROJECT_NAME}"
+      POSTGRES_PASSWORD: "${COMPOSE_PROJECT_NAME}"
+      POSTGRES_DBNAME: "${COMPOSE_PROJECT_NAME}"
+      POSTGRES_DBUSER: "${COMPOSE_PROJECT_NAME}"
+      POSTGRES_DBPASS: "${COMPOSE_PROJECT_NAME}"
