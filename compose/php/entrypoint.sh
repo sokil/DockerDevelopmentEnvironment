@@ -28,7 +28,7 @@ then
         opcache
 
     # node
-    # curl -sL https://deb.nodesource.com/setup_6.x | bash -
+    # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
     # apt-get install -y nodejs
 
     # grunt
