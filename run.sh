@@ -10,9 +10,9 @@ function print_usage {
 
 function print_available_commands {
     echo -e "\033[1;37mAvailable commands:\033[0m"
-    echo -e "\033[0;32mbash [service_name]\033[0m: launch bash in container"
-    echo -e "\033[0;32mshell_php\033[0m: launch bash as www-user in container"
-    echo -e "\033[0;32mshell_mysql\033[0m: launch mysql in container"
+    echo -e "\033[0;32mbash [service_name]\033[0m: launch bash in some service container as root"
+    echo -e "\033[0;32mphp\033[0m: launch php bash as www-user in container"
+    echo -e "\033[0;32mmysql\033[0m: launch mysql in container"
     echo -e "\033[0;32mAny commands not in list above goes directly to docker-compose, so be free to use this tool as docker-compose\033[0m"
     echo ""
 }
@@ -126,17 +126,11 @@ case $COMMAND_NAME in
         SERVICE_NAME=$2
         exec_container_command_root ${COMPOSE_PROJECT_NAME} $SERVICE_NAME bash
         ;;
-    shell_php)
+    php)
         exec_container_command_user ${COMPOSE_PROJECT_NAME} php bash www-data
         ;;
-    shell_mysql)
+    mysql)
         exec_container_command_root ${COMPOSE_PROJECT_NAME} php "mysql ${COMPOSE_PROJECT_NAME}"
-        ;;
-    drop)
-        drop_container "${COMPOSE_PROJECT_NAME}"
-        ;;
-    stop)
-        stop_container
         ;;
     *)
         # fallback to docker-container
