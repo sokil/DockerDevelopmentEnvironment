@@ -3,7 +3,7 @@
 This tool is a builder of development environment including PHP-FPM, MySQL and Nginx.
 I'ts just a bunch of configurations, so you can freely change them for you needs.
 It's also pre configured, so you need only place your files in sources directory and run container.
-Entry point to work with container is `run.sh` which wraps `docker-container` and
+Entry point to work with container is `run.sh` which wraps `docker-compose` and
 pass some configuration together, allowing single place of configuration in `.env` file.
 
 ## Create project
