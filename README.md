@@ -23,9 +23,9 @@ Container management done through `run.sh`.
 ```
 $ ./run.sh
 Available commands:
-bash [service_name]: launch bash in some service container
-shell_php: launch bash as www-user in container
-shell_mysql: launch mysql in container
+bash [service_name]: launch bash in some service container as root
+php: launch php bash as www-user in container
+mysql: launch mysql in container
 Any commands not in list above goes directly to docker-compose, so be free to use this tool as docker-compose
 ```
 
