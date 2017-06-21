@@ -6,7 +6,7 @@ It's also pre configured, so you need only place your files in sources directory
 Entry point to work with container is `run.sh` which wraps `docker-compose` and
 pass some configuration together, allowing single place of configuration in `.env` file.
 
-You say "Yey, but we already have http://laradock.io/". And my answer is: yes, i know. Already know... ;)
+You say, hey, but we already have http://laradock.io/. And my answer is: yes, i know. Already know... ;)
 
 ## Create project
 
