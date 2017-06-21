@@ -1,6 +1,6 @@
-# Docker PHP Bootstrap
+# Docker Development Environment
 
-This tool is a builder of development environment including PHP-FPM, MySQL and Nginx.
+This tool is a builder of development environment including PHP-FPM, MySQL and Nginx, and [other usefull tools](#available-services).
 I'ts just a bunch of configurations, so you can freely change them for you needs.
 It's also pre configured, so you need only place your files in sources directory and run container.
 Entry point to work with container is `run.sh` which wraps `docker-compose` and
