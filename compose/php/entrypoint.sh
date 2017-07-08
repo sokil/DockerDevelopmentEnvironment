@@ -17,15 +17,23 @@ then
     # add library requirements
     apt-get update
     apt-get install --no-install-recommends -y \
-        libssl-dev
+        libssl-dev \
+        libpng-dev \
+        libjpeg-dev \
+        libjpeg62-turbo-dev \
+        libfreetype6-dev
 
-    # install ext-zip
+    # configure extensions
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+    
+    # install ext
     docker-php-ext-install \
         zip \
         json \
         pdo \
         pdo_mysql \
-        opcache
+        opcache \
+        gd
 
     # node
     # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
