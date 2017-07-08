@@ -14,26 +14,28 @@ export PATH=$PATH:/tools
 ### install php extensions
 if [[ -z $(dpkg -l | grep libssl-dev) ]];
 then
-    # add library requirements
+    # add common library requirements
     apt-get update
     apt-get install --no-install-recommends -y \
-        libssl-dev \
-        libpng-dev \
-        libjpeg-dev \
-        libjpeg62-turbo-dev \
-        libfreetype6-dev
+        libssl-dev
 
-    # configure extensions
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
-    
-    # install ext
+    # common extensions
     docker-php-ext-install \
         zip \
         json \
         pdo \
         pdo_mysql \
-        opcache \
-        gd
+        opcache
+        
+    # gd extensions
+    apt-get install --no-install-recommends -y libpng-dev libjpeg-dev libjpeg62-turbo-dev libfreetype6-dev
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+    docker-php-ext-install gd
+      
+    # intl extensions
+    apt-get install --no-install-recommends -y zlib1g-dev libicu-dev g++
+    docker-php-ext-configure intl
+    docker-php-ext-install intl
 
     # node
     # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
