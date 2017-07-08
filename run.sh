@@ -117,7 +117,7 @@ fi
 
 # import environment
 set -o allexport
-source .env
+source ${CURRENT_DIR}/.env
 set +o allexport
 
 # dispatch command
