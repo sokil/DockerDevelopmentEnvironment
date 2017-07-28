@@ -27,7 +27,7 @@ but you can add configuration in any way in any place. Explanation of environmen
 Example for `Symfony` project in `/var/www/server` with `.env` config in `/var/www/server/docker/.env`:
 ```
 SRC_DIR=..
-SRC_DOCUMENT_ROOT=www
+SRC_DOCUMENT_ROOT=web
 PHP_APP_ENTRYPOINT=app.php
 ```
 
