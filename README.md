@@ -18,12 +18,18 @@ Then you may change some variables if need in `.env` and run container through `
 All configs may be tuned through environment variables placed in `.env` file,
 but you can add configuration in any way in any place. Explanation of environment variables is inside `.env`.
 
-| Configuration parameter | Description                                                                            |
-| ----------------------- | -------------------------------------------------------------------------------------- |
-| SRC_DIR                 | Relative path on host machine to project directory relativery to .env                  |
-| SRC_DOCUMENT_ROOT       | Relative path on container machine to web server's document root relatively to SRC_DIR |
-| PHP_APP_ENTRYPOINT      | Path to app entrypoint file relatively to SRC_DOCUMENT_ROOT                            |
+| Configuration parameter | Description                                                                              |
+| ----------------------- | ---------------------------------------------------------------------------------------- |
+| SRC_DIR                 | Relative path on host machine to project directory relativery to `.env`                  |
+| SRC_DOCUMENT_ROOT       | Relative path on container machine to web server's document root relatively to `SRC_DIR` |
+| PHP_APP_ENTRYPOINT      | Path to app entrypoint file relatively to `SRC_DOCUMENT_ROOT`                            |
 
+Example for `Symfony` project in `/var/www/server` with `.env` config in `/var/www/server/docker/.env`:
+```
+SRC_DIR=..
+SRC_DOCUMENT_ROOT=www
+PHP_APP_ENTRYPOINT=app.php
+```
 
 ## Managing container
 
