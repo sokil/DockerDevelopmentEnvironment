@@ -130,7 +130,7 @@ case $COMMAND_NAME in
         exec_container_command_user ${COMPOSE_PROJECT_NAME} php bash www-data
         ;;
     mysql)
-        exec_container_command_root ${COMPOSE_PROJECT_NAME} php "mysql ${COMPOSE_PROJECT_NAME}"
+        exec_container_command_root ${COMPOSE_PROJECT_NAME} mysql "mysql ${COMPOSE_PROJECT_NAME}"
         ;;
     *)
         # fallback to docker-container
