@@ -25,6 +25,7 @@ then
         json \
         pdo \
         pdo_mysql \
+        pdo_pgsql \
         opcache
         
     # gd/exif extensions
