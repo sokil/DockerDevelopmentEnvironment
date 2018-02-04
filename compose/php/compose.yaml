@@ -13,9 +13,5 @@ services:
       - "./compose/php/conf/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini"
       - "./compose/php/bin:/tools"
       - "./compose/php/bash/.bashrc:/root/.bashrc"
-    depends_on:
-      - "mysql"
-    links:
-      - "mysql"
     environment:
       PHP_IDE_CONFIG: "serverName=${COMPOSE_PROJECT_NAME}"
