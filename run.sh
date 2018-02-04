@@ -49,12 +49,12 @@ function compose {
 
     if [[ ! -z $MYSQL_IMAGE ]];
     then
-        DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/php/compose.yaml"
+        DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/mysql/compose.yaml"
     fi
 
     if [[ ! -z $PHP_IMAGE ]];
     then
-        DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/mysql/compose.yaml"
+        DOCKER_COMPOSE_COMMAND="${DOCKER_COMPOSE_COMMAND} -f ${CURRENT_DIR}/compose/php/compose.yaml"
     fi
 
     if [[ ! -z $ELASTICSEARCH_IMAGE ]];
