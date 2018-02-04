@@ -9,6 +9,7 @@ export DOCKERHOST_IP="$(/sbin/ip route|awk '/default/ { print $3 }')";
 echo "$DOCKERHOST_IP dockerhost" >> /etc/hosts
 
 ### Set variables
+export PHP_VERSION=$(php -r 'echo phpversion();')
 export PATH=$PATH:/tools
 
 ### install php extensions
@@ -47,9 +48,13 @@ then
 
     # xdebug
     pecl channel-update pecl.php.net
-    # last version with support PHP < 7.0
-    # remove version for support of PHP >= 7.0
-    pecl install xdebug-2.5.5
+    # last version of xdebug with support PHP < 7.0 is 2.5.5
+    if [[ ${PHP_VERSION:0:2} == "5." ]]; then
+        pecl install xdebug-2.5.5;
+    else
+        pecl install xdebug;
+    fi
+    
     docker-php-ext-enable xdebug.so
 fi
 
