@@ -15,3 +15,4 @@ services:
       - "./compose/php/bash/.bashrc:/root/.bashrc"
     environment:
       PHP_IDE_CONFIG: "serverName=${COMPOSE_PROJECT_NAME}"
+      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
