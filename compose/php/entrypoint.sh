@@ -47,7 +47,9 @@ then
 
     # xdebug
     pecl channel-update pecl.php.net
-    pecl install xdebug-2.5.5 # last version with support PHP < 7.0
+    # last version with support PHP < 7.0
+    # remove version for support of PHP >= 7.0
+    pecl install xdebug-2.5.5
     docker-php-ext-enable xdebug.so
 fi
 
