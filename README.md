@@ -10,7 +10,7 @@ You say, hey, but we already have http://laradock.io/. And my answer is: yes, i 
 
 ## Create project
 
-To create new project just clone this repository anywhere, and place you code to `./src` directory.
+To create new project just clone this repository anywhere, and place your code to `./src` directory.
 Then you may change some variables if need in `.env` and run container through `run.sh`.
 
 ## Configuration
