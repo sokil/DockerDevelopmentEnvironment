@@ -46,7 +46,8 @@ then
     # npm install -g grunt-cli
 
     # xdebug
-    pecl install xdebug
+    pecl channel-update pecl.php.net
+    pecl install xdebug-2.5.5 # last version with support PHP < 7.0
     docker-php-ext-enable xdebug.so
 fi
 
