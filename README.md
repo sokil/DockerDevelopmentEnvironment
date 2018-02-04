@@ -23,7 +23,7 @@ but you can add configuration in any way in any place. Explanation of environmen
 | COMPOSE_PROJECT_NAME    | Name of project. Used as hostname of project and docker's project names                  |
 | SRC_DIR                 | Relative path on host machine to project directory relativery to `.env`                  |
 | SRC_DOCUMENT_ROOT       | Relative path on container machine to web server's document root relatively to `SRC_DIR` |
-| PHP_APP_ENTRYPOINT      | Path to app entrypoint file relatively to `SRC_DOCUMENT_ROOT`                            |
+| PHP_APP_ENTRYPOINT      | Path to app entrypoint file relatively to `SRC_DOCUMENT_ROOT`, used by Nginx proxy       |
 
 Example for `Symfony` project in `/var/www/server` with `.env` config in `/var/www/server/docker/.env`:
 ```
