@@ -42,9 +42,11 @@ then
     # node
     # curl -sL https://deb.nodesource.com/setup_8.x | bash -
     # apt-get install -y nodejs
+    # npm install
 
     # grunt
     # npm install -g grunt-cli
+    # grunt
 
     # xdebug
     pecl channel-update pecl.php.net
@@ -56,18 +58,13 @@ then
     fi
     
     docker-php-ext-enable xdebug.so
-fi
-
-
-### install composer
-if [[ -z $(which composer.phar) ]];
-then
+    
     # install composer
     curl -sS https://getcomposer.org/installer | php -- \
         --install-dir=/usr/bin \
         --filename=composer.phar
 
-    # update composer
+    # initial composer update
     composer.phar install \
         --no-scripts \
         -v \
