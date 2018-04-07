@@ -13,7 +13,9 @@ function print_available_commands {
     echo -e "\033[0;32mbash [service_name]\033[0m: launch bash in some service container as root"
     echo -e "\033[0;32mphp\033[0m: launch php bash as www-user in container"
     echo -e "\033[0;32mmysql\033[0m: launch mysql in container"
-    echo -e "\033[0;32mAny commands not in list above goes directly to docker-compose, so be free to use this tool as docker-compose\033[0m"
+    echo ""
+    echo -e "\033[0;32mAny commands not in list above goes directly to docker-compose, so be free to use this tool as docker-compose:\033[0m"
+    docker-compose
     echo ""
 }
 
