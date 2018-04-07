@@ -40,7 +40,7 @@ then
     docker-php-ext-install intl
 
     # node
-    # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+    # curl -sL https://deb.nodesource.com/setup_8.x | bash -
     # apt-get install -y nodejs
 
     # grunt
