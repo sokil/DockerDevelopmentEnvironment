@@ -101,11 +101,7 @@ Database, user and password equals to `COMPOSE_PROJECT_NAME`. Hostname equals to
 
 Uncomment node and grunt sections at `./compose/php/entrypoint.sh` if you require it.
 
-### PostgreSQL
-
-Database, user and password equals to `COMPOSE_PROJECT_NAME`. Hostname equals to ${COMPOSE_PROJECT_NAME}_postgresql
-
-## Debugging with XDebug
+#### Debugging with XDebug
 
 PHP container pre configured to debug web sessions and console applications.
 PHP will send debug to host mashine on remote port `9001`.
@@ -114,6 +110,10 @@ To debug console app, use `xphp` tool:
 ```
 $ xphp some.php
 ```
+
+### PostgreSQL
+
+Database, user and password equals to `COMPOSE_PROJECT_NAME`. Hostname equals to ${COMPOSE_PROJECT_NAME}_postgresql
 
 ## Integration
 
