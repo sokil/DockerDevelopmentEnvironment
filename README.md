@@ -3,14 +3,14 @@
 This tool is a builder of development environment including PHP-FPM, MySQL and Nginx, and [other usefull tools](#available-services).
 I'ts just a bunch of configurations, so you can freely change them for you needs.
 It's also pre configured, so you need only place your files in sources directory and run container.
-Entry point to work with container is `run.sh` which wraps `docker-compose` and
+Entry point to work with container is `run` which wraps `docker-compose` and
 pass some configuration together, allowing single place of configuration in `.env` file.
 
 You say, hey, but we already have http://laradock.io/. And my answer is: yes, i know. Already know... ;)
 
 ## Create project
 
-To create new project just clone this repository. Then you may change some variables in `.env` and run container through `run.sh`.
+To create new project just clone this repository. Then you may change some variables in `.env` and run container through `run`.
 
 By default your project placed in `./src` directory.
 
@@ -40,10 +40,10 @@ After running project may be accessible in browser by address `http://someprojec
 
 ## Managing container
 
-Container management done through `run.sh`.
+Container managed through `run` command.
 
 ```
-$ ./run.sh
+$ ./run
 Available commands:
 bash [service_name]: launch bash in some service container as root
 php: launch php bash as www-user in container
@@ -51,33 +51,33 @@ mysql: launch mysql in container
 Any commands not in list above goes directly to docker-compose, so be free to use this tool as docker-compose
 ```
 
-This tool is just `docker-compose` with passed service configurations. So any commands of `docker-compose` may be passed to `run.sh`. 
+This tool is just `docker-compose` with passed service configurations. So any commands of `docker-compose` may be passed to `run`. 
 
 For example to build containers, run:
 ```
-$ run.sh up -d
+$ run up -d
 ```
 
 To stop containers, run:
 ```
-$ run.sh stop
+$ run stop
 ```
 
 Also available additional commands.
 
 To open php shell with www-data user in container, run:
 ```
-$ run.sh php
+$ run php
 ```
 
 To open mysql console in container, run:
 ```
-$ run.sh mysql
+$ run mysql
 ```
 
 To open bash in any container, run:
 ```
-$ run.sh bash nginx
+$ run bash nginx
 ```
 
 ## SSL
