@@ -1,0 +1,12 @@
+#/bin/env bash
+
+CURRENT_DIR=$(dirname $(readlink -f $0))
+
+# import environment
+set -o allexport
+source ${CURRENT_DIR}/../.env
+set +o allexport
+
+CURRENT_DATE=$(date +%Y%M%d%H%M)
+
+docker exec -it ${COMPOSE_PROJECT_NAME}_mysql mysqldump --skip-extended-insert ${COMPOSE_PROJECT_NAME} > $CURRENT_DIR/../shared/mysqld/umps/$CURRENT_DATE.sql
