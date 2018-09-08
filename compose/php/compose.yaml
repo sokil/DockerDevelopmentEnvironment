@@ -13,6 +13,7 @@ services:
       - "./compose/php/conf/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini"
       - "./compose/php/bin:/tools"
       - "./compose/php/bash/.bashrc:/root/.bashrc"
+      - "./compose/php/bash/.bashrc:/var/www/.bashrc"
     environment:
       PHP_IDE_CONFIG: "serverName=${COMPOSE_PROJECT_NAME}"
       COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
