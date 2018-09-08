@@ -11,7 +11,7 @@ services:
       - "./${SRC_DIR}:/var/www/${COMPOSE_PROJECT_NAME}"
       - "./compose/php/conf/php.ini:/usr/local/etc/php/php.ini"
       - "./compose/php/conf/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini"
-      - "./compose/php/bin:/tools"
+      - "./compose/php/tools:/tools"
       - "./compose/php/bash/.bashrc:/root/.bashrc"
       - "./compose/php/bash/.bashrc:/var/www/.bashrc"
     environment:
