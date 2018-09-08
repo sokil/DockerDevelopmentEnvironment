@@ -1,1 +1,1 @@
-PATH=$PATH:/tools
+PATH=$PATH:/tools:~/.composer/vendor/bin/
