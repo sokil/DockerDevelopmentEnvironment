@@ -22,7 +22,7 @@ then
         libssl-dez
 
     # zip
-    apt-get install --no-install-recommends -y zlib1g-dev
+    apt-get install --no-install-recommends -y zlib1g-dev libzip-dev
     docker-php-ext-install zip
 
     # gd/exif extensions
@@ -55,9 +55,14 @@ then
 
     # xdebug
     pecl channel-update pecl.php.net
-    # last version of xdebug with support PHP < 7.0 is 2.5.5
+    
+    # See compatibility with PHP at https://xdebug.org/download.php
     if [[ ${PHP_VERSION:0:2} == "5." ]]; then
+        # Last version of xdebug with support PHP < 7.0 is 2.5.5
         pecl install xdebug-2.5.5;
+    elif [[ ${PHP_VERSION:0:3} == "7.3" ]]; then
+        # PHP 7.3 supported from v.2.7
+        pecl install xdebug-2.7.0beta1;
     else
         pecl install xdebug;
     fi
