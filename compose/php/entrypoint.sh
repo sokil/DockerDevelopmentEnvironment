@@ -4,11 +4,6 @@
 chown www-data:www-data /var/www
 cd /var/www/${COMPOSE_PROJECT_NAME}
 
-### Register host machine
-apt-get install iproute2
-export DOCKERHOST_IP="$(/sbin/ip route|awk '/default/ { print $3 }')";
-echo "$DOCKERHOST_IP dockerhost" >> /etc/hosts
-
 ### Set variables
 export PHP_VERSION=$(php -r 'echo phpversion();')
 export PATH=$PATH:/tools
@@ -19,7 +14,8 @@ then
     # add common library requirements
     apt-get update
     apt-get install --no-install-recommends -y \
-        libssl-dez
+        iproute2 \
+        libssl-dev
 
     # zip
     apt-get install --no-install-recommends -y zlib1g-dev libzip-dev
@@ -80,6 +76,10 @@ then
         -v \
         --optimize-autoloader
 fi
+
+### Register host machine
+export DOCKERHOST_IP="$(/sbin/ip route|awk '/default/ { print $3 }')";
+echo "$DOCKERHOST_IP dockerhost" >> /etc/hosts
 
 ### start server
 php-fpm
