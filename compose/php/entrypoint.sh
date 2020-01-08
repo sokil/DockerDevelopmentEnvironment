@@ -33,7 +33,6 @@ then
 
     # common extensions
     docker-php-ext-install \
-        zip \
         json \
         pdo \
         pdo_mysql \
