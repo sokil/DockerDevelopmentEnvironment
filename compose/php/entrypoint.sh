@@ -57,7 +57,7 @@ then
         pecl install xdebug-2.5.5;
     elif [[ ${PHP_VERSION:0:3} == "7.3" ]]; then
         # PHP 7.3 supported from v.2.7
-        pecl install xdebug-2.7.2;
+        pecl install xdebug-2.9.1;
     else
         pecl install xdebug;
     fi
