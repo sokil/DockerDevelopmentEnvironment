@@ -15,7 +15,8 @@ then
     apt-get update
     apt-get install --no-install-recommends -y \
         iproute2 \
-        libssl-dev
+        libssl-dev \
+        libzip-dev
 
     # zip
     apt-get install --no-install-recommends -y zlib1g-dev libzip-dev
