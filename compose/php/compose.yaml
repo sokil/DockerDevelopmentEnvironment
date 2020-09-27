@@ -14,6 +14,7 @@ services:
       - "./compose/php/tools:/tools"
       - "./compose/php/bash/.bashrc:/root/.bashrc"
       - "./compose/php/bash/.bashrc:/var/www/.bashrc"
+      - "./shared/php/xdebug_profile:/tmp/xdebug_profile"
     environment:
       PHP_IDE_CONFIG: "serverName=${COMPOSE_PROJECT_NAME}"
       COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
